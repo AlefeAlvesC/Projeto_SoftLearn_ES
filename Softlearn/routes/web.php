@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ModuleController;
 
 
 Route::get('/', function () {
@@ -16,6 +17,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::middleware(['auth']) -> group(function () {
+
+    Route::resource('modules', ModuleController::class);
+
     $pages = [
         'dashboard' => 'dashboard',
         'flashcards' => 'flashcards',
