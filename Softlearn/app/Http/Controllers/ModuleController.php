@@ -8,10 +8,58 @@ use Illuminate\Support\Facades\Auth;
 
 class ModuleController extends Controller
 {
-    public function index()
+    public function index() 
     {
-        $modules = Module::where('user_id', Auth::id())->get();
-        return view('modules.index', ['modules' => $modules]);
+        $modulos = [
+            [
+                'id' => 1,
+                'titulo' => 'Módulo 1: Fundamentos do Scrum',
+                'descricao' => 'Aprenda os conceitos básicos, papéis e cerimônias do Scrum.',
+                'aulas_total' => 5,
+                'aulas_concluidas' => 2,
+                'imagem_url' => 'https://via.placeholder.com/300x200.png/2c7a6c/ffffff?text=Scrum' 
+            ],
+            [
+                'id' => 2,
+                'titulo' => 'Módulo 2: Diagramas UML',
+                'descricao' => 'Domine Casos de Uso, Diagramas de Classe e Sequência.',
+                'aulas_total' => 8,
+                'aulas_concluidas' => 0,
+                'imagem_url' => 'https://via.placeholder.com/300x200.png/ef4444/ffffff?text=UML' 
+            ],
+            [
+                'id' => 3,
+                'titulo' => 'Módulo 3: Métodos Ágeis',
+                'descricao' => 'Uma visão geral sobre Kanban, XP e outros métodos.',
+                'aulas_total' => 4,
+                'aulas_concluidas' => 4,
+                'imagem_url' => 'https://via.placeholder.com/300x200.png/3b82f6/ffffff?text=Agile' 
+            ],
+        ];
+
+        return view('aulas', [
+            'modulos' => $modulos
+        ]);
+    }
+
+    public function show($id) 
+    {
+        $moduloAtual = [
+            'id' => $id,
+            'titulo' => 'Módulo ' . $id . ': Título de Exemplo',
+            'descricao' => 'Descrição detalhada do módulo ' . $id . '.'
+        ];
+
+        $syllabus = [
+            ['id' => 1, 'titulo' => 'Módulo 1: Fundamentos do Scrum'],
+            ['id' => 2, 'titulo' => 'Módulo 2: Diagramas UML'],
+            ['id' => 3, 'titulo' => 'Módulo 3: Métodos Ágeis'],
+        ];
+
+        return view('aula-modulo', [
+            'modulo'   => $moduloAtual, 
+            'syllabus' => $syllabus     
+        ]);
     }
 
     public function create()

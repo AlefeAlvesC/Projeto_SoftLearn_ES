@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AulaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ModuleController;
 
@@ -19,6 +20,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth']) -> group(function () {
 
     Route::resource('modules', ModuleController::class);
+    Route::get('/aulas', [ModuleController::class, 'index'])->name('aulas');
+    Route::get('/aulas/{id}', [ModuleController::class, 'show'])->name('aulas.show');
 
     $pages = [
         'dashboard' => 'dashboard',
@@ -30,7 +33,6 @@ Route::middleware(['auth']) -> group(function () {
         'configuracoes' => 'configuracoes',
         'meu-plano' => 'meu-plano',
         'competicao' => 'competicao',
-        'aulas' => 'aulas',
     ];
     foreach ($pages as $uri => $view)
     {
